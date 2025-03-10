@@ -31,6 +31,9 @@ async def on_shutdown(bot: Bot):
     await bot.delete_webhook()
     logging.info("Вебхук удален.")
 
+async def handle_root(request: web.Request):
+    return web.Response(text="Bot is running!")
+
 async def main():
     setup_logging()  # Настройка логирования
     logging.info("Запуск бота...")
@@ -57,6 +60,7 @@ async def main():
 
     # Создание aiohttp приложения
     app = web.Application()
+    app.router.add_get("/", handle_root)  # Добавляем обработчик для корневого пути
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp,
         bot=bot,
@@ -72,7 +76,6 @@ async def main():
 
     logging.info(f"Сервер запущен на {base_url}")
     await asyncio.Event().wait()  # Бесконечное ожидание
-
 if __name__ == "__main__":
     try:
         asyncio.run(main())
