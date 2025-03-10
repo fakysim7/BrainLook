@@ -20,5 +20,5 @@ class Config:
     # Другие настройки (если нужны)
     DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-    WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+    WEBHOOK_URL = "https://brainlook.onrender.com"
     PORT = os.getenv("PORT", "10000")  
