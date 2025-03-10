@@ -22,7 +22,6 @@ def setup_logging():
     )
     logging.info("Логирование настроено.")
 
-base_url = "https://your-bot-name.onrender.com/webhook/TELEGRAM_BOT_TOKEN"
 # Инициализация бота и диспетчера
 async def on_startup(bot: Bot, base_url: str):
     await bot.set_webhook(f"{base_url}/webhook")
@@ -47,8 +46,8 @@ async def main():
     register_handlers(dp)
 
     # Настройка вебхука
-    base_url = Config.WEBHOOK_URL  # URL вашего сервера на Render
-    dp.startup.register(on_startup)
+    base_url = Config.WEBHOOK_URL  # URL вашего сервера
+    dp.startup.register(on_startup, base_url)
     dp.shutdown.register(on_shutdown)
 
     # Создание aiohttp приложения
@@ -69,7 +68,7 @@ async def main():
     logging.info(f"Сервер запущен на {base_url}")
     await asyncio.Event().wait()  # Бесконечное ожидание
 
-if __name__ == "main":
+if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
