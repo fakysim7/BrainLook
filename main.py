@@ -47,7 +47,12 @@ async def main():
 
     # Настройка вебхука
     base_url = Config.WEBHOOK_URL  # URL вашего сервера
-    dp.startup.register(on_startup, base_url)
+
+    # Используем замыкание для передачи base_url в on_startup
+    async def on_startup_wrapper(bot: Bot):
+        await on_startup(bot, base_url)
+
+    dp.startup.register(on_startup_wrapper)
     dp.shutdown.register(on_shutdown)
 
     # Создание aiohttp приложения
