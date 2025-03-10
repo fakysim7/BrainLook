@@ -19,3 +19,6 @@ class Config:
 
     # Другие настройки (если нужны)
     DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+
+    WEBHOOK_URL = os.getenv(WEBHOOK_URL)
+    PORT = os.getenv(PORT)  
