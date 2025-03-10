@@ -120,7 +120,7 @@ async def profile(callback: types.CallbackQuery):
 @router.callback_query(F.data == "return_to_menu")
 async def return_to_menu(callback: types.CallbackQuery):
     logging.info(f"Пользователь {callback.message.from_user.id} вернулся в меню.")
-    photo = FSInputFile("D:/BraiLook/AI_Assist/image/image.png")
+    photo = FSInputFile("image/image.png")
     await callback.answer()
     await callback.message.answer_photo(
         photo,
@@ -175,7 +175,7 @@ async def process_new_workplace(message: types.Message, state: FSMContext):
 @router.message(F.text == "Вернуться в меню")
 async def return_to_menu(message: types.Message):
     logging.info(f"Пользователь {message.from_user.id} вернулся в меню.")
-    photo = FSInputFile("D:/BraiLook/AI_Assist/image/image.png")
+    photo = FSInputFile("image/image.png")
     await message.answer_photo(
         photo,
         "Выбери действие:",
