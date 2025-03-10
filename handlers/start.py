@@ -3,6 +3,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 import logging
+from aiogram.types import FSInputFile
 
 from utils.states import ProfileStates
 from keyboards.menu import create_main_menu_keyboard
@@ -119,8 +120,13 @@ async def profile(callback: types.CallbackQuery):
 @router.callback_query(F.data == "return_to_menu")
 async def return_to_menu(callback: types.CallbackQuery):
     logging.info(f"Пользователь {callback.message.from_user.id} вернулся в меню.")
+    photo = FSInputFile("D:/BraiLook/AI_Assist/image/image.png")
     await callback.answer()
-    await callback.message.answer("Главное меню ассистента", reply_markup=create_main_menu_keyboard())
+    await callback.message.answer_photo(
+        photo,
+        "Выбери действие:",
+        reply_markup=create_main_menu_keyboard()
+    )
 
 @router.callback_query(F.data == "change_age")
 async def change_age(callback: types.CallbackQuery, state: FSMContext):
@@ -165,6 +171,16 @@ async def process_new_workplace(message: types.Message, state: FSMContext):
     
     await message.answer("Место работы/учебы успешно обновлено!")
     await state.clear()
+
+@router.message(F.text == "Вернуться в меню")
+async def return_to_menu(message: types.Message):
+    logging.info(f"Пользователь {message.from_user.id} вернулся в меню.")
+    photo = FSInputFile("D:/BraiLook/AI_Assist/image/image.png")
+    await message.answer_photo(
+        photo,
+        "Выбери действие:",
+        reply_markup=create_main_menu_keyboard()
+    )
 
 
 # Функция для регистрации хэндлеров
