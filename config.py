@@ -6,7 +6,7 @@ load_dotenv()
 
 class Config:
     # Токен Telegram бота
-    TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+    TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
     # Ключ API OpenAI
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -20,5 +20,5 @@ class Config:
     # Другие настройки (если нужны)
     DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-    WEBHOOK_URL = "https://brainlook.onrender.com"
-    PORT = os.getenv("PORT", "10000")  
+    # WEBHOOK_URL = "https://brainlook.onrender.com"  # Ваш домен на Render
+    # PORT = 10000  # Порт для вебхука (Render использует порт 10000 по умолчанию)

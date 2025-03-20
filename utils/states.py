@@ -12,3 +12,7 @@ class EventState(StatesGroup):
 class ProfileStates(StatesGroup):
     change_age = State()  
     change_workplace = State()  
+
+class Registration(StatesGroup):
+    age = State()
+    workplace = State()
